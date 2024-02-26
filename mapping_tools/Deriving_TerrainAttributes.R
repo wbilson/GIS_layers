@@ -184,6 +184,16 @@ w <- 20
 sdmv<- DMV(bathy, w=w, shape= "circle", na.rm = TRUE, stand="range")
 plot(sdmv)
 
+#2- scalefactor = 154
+2*77
+#6- scalefactor = 462
+6*77
+#10- scalefactor = 1077
+10*77
+#10- scalefactor = 1540
+20*77
+
+
 #Save dmv
 #writeRaster(sdmv, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sdmv_2circlenw.tif",  filetype = "GTiff")
 #writeRaster(sdmv, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sdmv_6circlenw.tif",  filetype = "GTiff")
@@ -191,7 +201,18 @@ plot(sdmv)
 #writeRaster(sdmv, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sdmv_20circlenw.tif",  filetype = "GTiff")
 
 #BPI
-#annulus_window(radius = c(5,10), unit = "cell")
+an.5.100 <- annulus_window(radius = c(5,100), unit = "cell")
+#scale factor 7700 (outer radius x horizontal resolution of bathy)
+100*77
+an.25.50 <- annulus_window(radius = c(25,50), unit = "cell")
+#scale factor 3850
+50*77
+an.1.10 <- annulus_window(radius = c(1,10), unit = "cell")
+#scale factor 770
+10*77
+an.1.5 <- annulus_window(radius = c(1,5), unit = "cell")
+#scale factor 385
+5*77
 
 #broad BPI (standardized (relative position is standardized by dividing by the standard deviation))
 sbbpi<- BPI(bathy, w = annulus_window(radius = c(5,100), unit = "cell"), stand="sd", na.rm = TRUE)
@@ -208,6 +229,11 @@ plot(sfbpi)
 #global(sfbpi, fun="isNA")
 #global(sfbpi, fun="notNA")
 
+sfbpi<- BPI(bathy, w = annulus_window(radius = c(1,20), unit = "cell"), stand="sd", na.rm = TRUE)
+plot(sfbpi)
+#scale factor 1540
+20*77
+
 sfbpi2 <- BPI(bathy, w = annulus_window(radius = c(1,5), unit = "cell"), stand="sd", na.rm = TRUE)
 plot(sfbpi)
 
@@ -215,6 +241,7 @@ plot(sfbpi)
 #writeRaster(sbbpi, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sbbpi_5x100.tif",  filetype = "GTiff")
 #writeRaster(sbbpi2, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sbbpi_25x50.tif",  filetype = "GTiff")
 #writeRaster(sfbpi, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sfbpi_1x10.tif",  filetype = "GTiff")
+#writeRaster(sfbpi, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sfbpi_1x20.tif",  filetype = "GTiff")
 #writeRaster(sfbpi2, filename= "Z:/GISdata/Private/BoF_GoM_dataset/sfbpi_1x5.tif",  filetype = "GTiff")
 
 
@@ -326,4 +353,6 @@ for(w in c(3,5,7,11,17,27,43,69)) {
   summary(benthoscape.new)
   
   writeRaster(benthoscape.new, filename= paste0("Z:/GISdata/Private/BoF_GoM_dataset/snapped_to_bathy/benthoscape_BOF_UTMZ20.tif"), filetype = "GTiff",overwrite=TRUE)
+  
+ 
   
