@@ -298,6 +298,7 @@ for(w in c(3,5,7,11,17,27,43,69)) {
   
   rastList_crop <- lapply(r, crop_fn)
   plot(rastList_crop[[1]])
+  plot(rastList_crop[[1]])
   
   ras_list.nu <- dir(path, pattern = paste0("tif$"), full.names = FALSE, recursive = TRUE)
   names <- ras_list.nu  #to use for saving raster stacks. Check that these are as you want them.
